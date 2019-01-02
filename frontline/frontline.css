@@ -1,0 +1,13 @@
+.container {
+    width: 100%;
+  }
+  
+.content {
+  margin-top: 20px;
+  padding: 20px;
+  overflow: scroll;
+}
+
+#support {
+  text-align: right;
+}

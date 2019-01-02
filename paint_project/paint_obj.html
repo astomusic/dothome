@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!--노수진손채원!@()-->
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Real Painting</title>
+<link rel="stylesheet" type="text/css" href="paint_HCJ.css" />
+</head>
+
+<body>
+  <div id="wrap">
+  	<div id="top">
+  	<!--input type="text" id='check'> </input-->
+  		<div id="info">
+	  		<ul>COLOR : <a id="stat_color">black </a></ul>
+	  		<ul>BRUSH : <a id="stat_brush">inkpen </a><ul>
+	  	</div>
+  	</div>
+  	
+  	<div id ="paper">
+  	<img id="left" src="img/easel_left.png" width="10px">
+  	
+  	<div id="canvas">
+  		<canvas id="easel" width="978px" height="500px"></canvas>
+  	</div>
+  	<img id="right" src="img/easel_right.png" width="10px">
+  	</div>
+  	
+  	
+  	<div id="bottom"><a id="save" href ="">Save your picture</a>
+  	<img id="palette" src="img/palette.png" width="400px">
+  	</div>
+  </div>
+  
+<script>
+window.addEventListener('load', function() {
+	Global.color_init();
+	Elements.context_init();
+	
+	
+	/* 오브젝트 수업 실습
+	var myObj = {
+		name : 'hary',
+		age : 23,
+		isMan : false,
+		getName : function() {
+			return this.name;
+		}
+	}
+	console.log(myObj.getName());
+	
+	var name = 'next';
+	var objA = {
+		name : 'sunjin'
+	}
+	
+	function getname() {
+		return this.name;
+	}
+	
+	var newfun = getname.bind(objA);
+	console.log(newfun());
+	*/
+
+	
+/*	ajax, json실습
+	function test(e) { 
+		var request =  new XMLHttpRequest();
+		request.open("GET", "response.txt", true);
+		console.log("start");
+		request.send(null);
+		console.log("before");
+		
+		request.onreadystatechange = function() {
+			if(request.readyState == 4 && request.status == 200) {
+				console.log(request.status + " " + request.statusText);
+				result = request.responseText;
+				console.log(result);
+			}
+		};
+		
+		console.log("after");
+
+	}
+	
+	function requestAjax(e) { 
+		var request =  new XMLHttpRequest();
+		request.open("GET", "response.json", true);
+		request.send(null);
+		
+		request.onreadystatechange = function() {
+			if(request.readyState == 4 && request.status == 200) {
+				var sResult = request.responseText;
+				var obj = JSON.parse(sResult);
+				console.log(obj);
+				console.log(obj.majors[1].professor);
+				var insert = obj.majors[1].professor;
+				elTop.insertAdjacentHTML('afterbegin',insert);
+			}
+		};
+	}
+*/
+/* ajax, json 8월 13일 과제 */
+	function requestAjax() {
+		var request =  new XMLHttpRequest();
+		request.open("GET", "info.json", true);
+		request.send(null);
+		
+		request.onreadystatechange = function() {
+			if(request.readyState == 4 && request.status == 200) {
+				var sResult = request.responseText;
+				var obj = JSON.parse(sResult);
+				var stat_color = obj.color[Global.color_ch];
+				var stat_brush = obj.brush[Global.brush_ch];
+				Elements.elcolor.innerHTML = stat_color;
+				Elements.elbrush.innerHTML = stat_brush;				}
+		};
+	}
+	
+	Elements.elcanvas.addEventListener('mousedown', function(e) {
+		Global.startX = e.offsetX;
+		Global.startY = e.offsetY;
+		Elements.context.beginPath();
+		Elements.context.moveTo(Global.startX,Global.startY);
+		Elements.elcanvas.addEventListener('mousemove', Global.brush, false);
+	}, false);
+	
+	Elements.elcanvas.addEventListener('mouseup', function(e) {
+		Elements.elcanvas.removeEventListener('mousemove', Global.brush, false);
+	}, false);
+	
+
+	Elements.elTop.addEventListener('click', function(e) {
+		Elements.context.clearRect(0,0,978,500);
+		Elements.context.restore();
+	}, false);
+	
+	Elements.elbottom.addEventListener('click', function(e) {
+		var dataURL = Elements.elcanvas.toDataURL();
+		Elements.elsave.href = dataURL;
+		Elements.elsave.download = "yours";
+	}, false);
+	
+	Elements.elpalette.addEventListener('click', function(e) {
+		var cur_X = e.offsetX;
+		var cur_Y = e.offsetY;
+		var brush_no = 3;
+		requestAjax();
+		//console.log("brush_ch: " + brush_ch + "brush_count: " + brush_count);
+		//debugger;
+		if(5 <= cur_X && cur_X <= 158 && 56 <= cur_Y && cur_Y <= 153) {
+			Global.brush_count++;
+			if (Global.brush_count % brush_no == 0) {
+				Global.brush = drawer.inkpen;
+				Global.brush_ch = 0;
+			}
+			else if (Global.brush_count % brush_no == 1) {
+				Global.brush = drawer.spray;
+				Global.brush_ch = 1;
+			}
+			else if (Global.brush_count % brush_no == 2) {
+				Global.brush = drawer.pen;
+				Global.brush_ch = 2;
+			}
+//			else if (brush_count % brush_no == 3) {
+//				brush = draw4;
+//				brush_ch = 3;
+//			}
+//			console.log("brush_ch: " + brush_ch + "brush_count: " + brush_count);
+//			console.log(brush);
+			
+		}
+
+		else if(102 <= cur_X && cur_X <= 139 && 27 <= cur_Y && cur_Y <= 52) 
+			{
+				Global.color = 'rgba(0, 0, 0, '+Global.alpha+')';
+				Global.color_ch = 0;
+			}
+		else if(171 <= cur_X && cur_X <= 208 && 26 <= cur_Y && cur_Y <= 54) 
+			{
+				Global.color = 'rgba(0, 200, 0, '+Global.alpha+')';
+				Global.color_ch = 1;
+			}
+		else if(229 <= cur_X && cur_X <= 266 && 44 <= cur_Y && cur_Y <= 78) 
+			{
+				Global.color = 'rgba(200, 0, 0, '+Global.alpha+')';
+				Global.color_ch = 2;
+			}
+		else if(281 <= cur_X && cur_X <= 324 && 69 <= cur_Y && cur_Y <= 106) 
+			{
+				Global.color = 'rgba(200, 120, 0, '+Global.alpha+')';
+				Global.color_ch = 3;
+			}
+		else if(317 <= cur_X && cur_X <= 367 && 107 <= cur_Y && cur_Y <= 145) 
+			{
+				Global.color = 'rgba(200, 200, 0,'+Global.alpha+')';
+				Global.color_ch = 4;
+			}
+		else if(335 <= cur_X && cur_X <= 373 && 159 <= cur_Y && cur_Y <= 192) 
+			{
+				Global.color = 'rgba(0, 0, 200, '+Global.alpha+')';
+				Global.color_ch = 5;
+			}
+		else if(294 <= cur_X && cur_X <= 347 && 198 <= cur_Y && cur_Y <= 243) 
+			{
+				Global.color = 'rgba(200, 200, 200,'+Global.alpha+')';
+				Global.color_ch = 6;
+			}
+		else if(236 <= cur_X && cur_X <= 271 && 196 <= cur_Y && cur_Y <= 231) 
+			{
+				Global.color = 'rgba(120, 40, 40,'+Global.alpha+')';
+				Global.color_ch = 7;
+			}
+	}, false);
+
+		/*
+		var CX_prev = e.offsetX-1;
+		var CY_prev = e.offsetY-1;
+		
+		if (CX !== CX_prev && CY !== CY_prev) {
+			context.beginPath();
+			context.moveTo(CX_prev,CY_prev);
+			context.lineTo(CX,CY);
+			context.closePath();
+			context.stroke();
+			console.log(CX, CY);
+		}
+		
+		CX_prev = CX;
+		CY_prev = CY;
+		*/
+	
+	/*
+	canvas.addEventListener('click', function(e) {
+		var CX = e.offsetX; 
+		var CY = e.offsetY; 
+		canvas.addEventListener('mouseover', function(f) {
+			var CCX = f.offsetX; 
+			var CCY = f.offsetY; 
+			console.log(CCX, CCY);
+			context.beginPath();
+			context.moveTo(CX,CY);
+			context.lineTo(CCX,CCY);
+			context.closePath();
+			context.stroke();
+			}, false);
+	}, false);
+	*/
+	
+	
+	/* 수업시간 연습문제
+	var div_all = document.querySelectorAll('div');
+	console.log(div_all)
+	
+	arr = [];
+	for(var i=0 ; div_all[i] ; i++){
+		console.log(div_all[i].getAttribute('id'));
+	}
+	console.log(arr);
+	*/
+	
+	/* 과제 
+	
+	var div= document.querySelector('#top');
+	
+	var inner_ul = "<ul>\n</ul>"
+	var inner_il = "<li></il>"
+	
+	div.innerHTML = inner_ul;
+	
+	var ul = document.querySelector('#top ul');
+	
+	var inner_il_all = "";
+	for (var i=0 ; i<3 ; ++i){
+		inner_il_all = inner_il_all + inner_il;
+	}
+	
+	ul.innerHTML= inner_il_all;*/
+	
+	/* 수업시간 실습과제
+	var elTop = document.querySelector('#top');
+	var elpaper = document.querySelector('#paper');
+	
+	function click_m1() {
+		var cssDis = window.getComputedStyle(elpaper);
+		if (cssDis['display']==="block") {
+			elpaper.style.display = "none";
+		}
+		else if (cssDis['display']==="none") {
+			elpaper.style.display = "block";
+		}
+		console.log(cssDis['display']);
+	};
+
+	elTop.addEventListener('click', click_m1, false);
+	
+	var check = document.querySelector('#check');
+	console.log(check);
+	check.addEventListener('keypress', function(e) { elTop.insertAdjacentHTML('beforeend',e.keyCode);}, false);
+	*/
+	
+	
+	
+}, false);
+
+	var Elements = {
+		elTop : document.querySelector('#top'),
+		elpalette : document.querySelector('#palette'),
+		elcanvas : document.getElementById('easel'),
+		elcolor : document.getElementById('stat_color'),
+		elbrush : document.getElementById('stat_brush'),
+		elbottom : document.getElementById('bottom'),
+		elsave : document.getElementById('save'),
+		context_init : function() {
+			this.context = this.elcanvas.getContext('2d');
+		}
+		//context : document.getElementById('easel').getContext('2d')
+	}
+	
+	var drawer =  {
+		/*function draw1(e) {
+			context.save();
+			var cur_X = e.offsetX;
+			var cur_Y = e.offsetY;
+			var mov_X = e.movementX || e.mozMovementX || e.webkitMovementX || 0 ;
+			var mov_Y = e.movementY || e.mozMovementY || e.webkitMovementY || 0 ;
+			var a_mov_X = Math.abs(mov_X);
+			var a_mov_Y = Math.abs(mov_Y);
+			var len = Math.sqrt(a_mov_X*a_mov_X + a_mov_Y*a_mov_Y);
+			var rep = len;
+			//var size = 15*len/(len+50);
+			var size = 150/(len+15);
+			// console.log(len, size);
+			context.beginPath()
+			context.arc(cur_X,cur_Y,size,0,180,false);
+			if(len > size){
+				for(var i=0; i<= rep ; i++){
+					var cor_X = cur_X - (mov_X/rep)*(i+1);
+					var cor_Y = cur_Y - (mov_Y/rep)*(i+1);
+					context.arc(cor_X,cor_Y,size,0,180,false);
+				}
+				
+			}
+			//context.moveTo(cur_X,cur_Y);
+			//context.lineTo(cur_X,cur_Y);
+			context.fillStyle = color; 
+			context.strokeStyle = color;
+			context.fill();
+			context.stroke();
+			context.restore();
+			context.closePath();
+		};*/
+		
+		inkpen : function(e) {
+			var cur_X = e.offsetX;
+			var cur_Y = e.offsetY;
+			var mov_X = (cur_X-Global.startX);
+			var mov_Y = (cur_Y-Global.startY);
+			var len = Math.sqrt(mov_X * mov_X + mov_Y * mov_Y);
+			var size = 30*len/(len*len+15);
+			Elements.context.beginPath();
+			Elements.context.arc(cur_X,cur_Y,size,0,180,false);
+			if(len > size){
+				for(var i=0; i<= len ; i++){
+					var cor_X = cur_X - (mov_X/len)*(i+1);
+					var cor_Y = cur_Y - (mov_Y/len)*(i+1);
+					Elements.context.arc(cor_X,cor_Y,size,0,180,false);
+				}	
+			}
+			Elements.context.fillStyle = Global.color; 
+			Elements.context.strokeStyle = Global.color;
+			Elements.context.fill();
+			
+			Global.startX = cur_X;
+			Global.startY = cur_Y;
+		},
+		
+		 test : function(e) {
+			var cur_X = e.offsetX;
+			var cur_Y = e.offsetY;
+			var mov_X = (cur_X-Global.startX);
+			var mov_Y = (cur_Y-Global.startY);
+			var len = 0.5*Math.sqrt(mov_X * mov_X + mov_Y * mov_Y);
+			var size = 200/(len+20);
+			
+			Elements.context.lineCap="round";
+			Elements.context.lineTo(cur_X,cur_Y);
+			Elements.context.lineJoin = 'round';
+			Elements.context.lineWidth = size;
+			Elements.context.fillStyle = Global.color; 
+			Elements.context.strokeStyle = Global.color;
+			Elements.context.fill();
+			Elements.context.stroke();
+			Elements.context.closePath();
+			Elements.context.beginPath();
+			
+			Global.startX = cur_X;
+			Global.startY = cur_Y;
+			Elements.context.moveTo(cur_X,cur_Y);
+		},
+		
+		spray : function(e) {
+			var cur_X = e.offsetX;
+			var cur_Y = e.offsetY;
+			var mov_X = (cur_X-Global.startX);
+			var mov_Y = (cur_Y-Global.startY);
+			var len = Math.sqrt(mov_X * mov_X + mov_Y * mov_Y);
+			var size = 1;
+			
+			Elements.context.fillStyle = Global.color; 
+			Elements.context.strokeStyle = Global.color;
+			
+			for(var i=0; i<= 10 ; i++){
+				var rand_x = (Math.random()*10 - 5)
+				var rand_y = (Math.random()*10 - 5)
+			
+				Elements.context.arc(cur_X+rand_x,cur_Y+rand_y,size,0,180,false);
+				Elements.context.fill();
+				Elements.context.closePath();
+				Elements.context.beginPath();
+			}
+			
+			Elements.context.lineWidth = size;
+			
+			Elements.context.fill();
+			Elements.context.closePath();
+		},
+		
+		pen : function(e) {
+			var cur_X = e.offsetX;
+			var cur_Y = e.offsetY;
+			var size = 10;
+			
+			Elements.context.lineCap = 'round';
+			Elements.context.lineJoin = 'round';
+			Elements.context.lineTo(cur_X,cur_Y);
+			
+			//var img = new Image();
+			//img.src = 'img/ch_red.png';
+			//var ptrn = context.createPattern(img,'repeat');
+			
+			//context.globalAlpha = 0.2;
+			
+			Elements.context.lineWidth = size;
+			Elements.context.strokeStyle = Global.color;
+			Elements.context.fillStyle = Global.color; 
+			Elements.context.stroke();
+			Elements.context.closePath();
+			Elements.context.beginPath();
+			
+			Global.startX = cur_X;
+			Global.startY = cur_Y;
+			Elements.context.moveTo(cur_X,cur_Y);
+		}
+	
+	}
+	
+	var Global = {
+		brush : drawer.inkpen,
+		brush_count : 0,
+		startX : 0,
+		startY : 0,
+		alpha : 1,
+		color_init : function() {
+			this.color = 'rgba(0, 0, 0, '+  this.alpha +')';
+		},
+		//var c_R = 0;
+		//var c_G = 0;
+		//var c_B = 0;
+		//var alpha = 0.5;
+		//var color = 'rgba(' + c_R + ',' + c_G + ',' + c_B + ',' + alpha + ')';
+		color_ch : 0,
+		brush_ch : 0
+	}
+</script>
+
+</body>
+</html>

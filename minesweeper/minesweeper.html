@@ -1,0 +1,377 @@
+<html>
+    <head>
+        <title>Mine Sweeper</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<!-- <?php
+			include('./include.php');
+		?>
+		<?php
+			db_connect();
+			$query = "SELECT * FROM astomusic.score order by time";
+			$result = mysql_query($query) or die('Error, failed.');
+			echo("<script>var value = [];</script>");
+			while($row = mysql_fetch_array($result)) {
+				echo("<script>var temp = [];</script>");
+				echo("<script>temp.push(".$row[0].");</script>");
+				echo("<script>temp.push(".$row[1].");</script>");
+				echo("<script>temp.push('$row[2]');</script>");
+				echo("<script> value.push(temp); </script>");
+
+			}
+			db_disconnect();
+		?> -->
+
+		<script>
+		var canvas;
+		var context;
+
+		var stopwatch = 0;
+		var name = "nobody";
+
+		var square_size = 50;
+		var grid_size = 10;
+		var number_of_mine = grid_size;
+		var gap = square_size+1;
+		var mine_position = [];
+		var opened_square = [];
+		var flag_state = [];
+		var map_around_mind = {}
+
+		function start() {
+
+			document.oncontextmenu = function (e) {
+				return false;
+			}
+
+			var wrap = document.getElementById("wrap");
+			canvas = document.getElementById("canvas");
+			context=canvas.getContext('2d');
+
+			wrap.setAttribute("style","width:" + window.innerWidth);
+
+			canvas.height = gap*grid_size+13*square_size;
+			canvas.width = gap*grid_size;
+
+			create_grid(grid_size);
+			set_mine(number_of_mine);
+			set_button();
+			set_scoreboard()
+			set_timer();
+
+			function set_button() {
+				for(var i=0 ; i<10 ; i++) {
+					draw_rect(i, 11, "#9139c4");
+					var restart = ["<","R","E","S","T","A","R","T","!",">"];
+					draw_count(restart[i], i, 11);
+				}
+			}
+
+			function set_scoreboard() {
+				for(var i=0 ; i<10 ; i++) {
+					draw_rect(i, 12, "#696969");
+					var restart = ["_","_","_","_","_","_","_","_","_","_"];
+					draw_count(restart[i], i, 12);
+				}
+				for(var i=0 ; i<9 ; i++) {
+					// input_score(i+1);
+				}
+			}
+
+			function input_score(num){
+				for(var i=0 ; i<10 ; i++) {
+					draw_rect(i, num+12, "#8f8f8f");
+				}
+					draw_count(num, 1, num+12);
+					draw_count(".", 2, num+12);
+					draw_count(value[num-1][2].charAt(0), 3, num+12);
+					draw_count(value[num-1][2].charAt(1), 4, num+12);
+					draw_count(value[num-1][2].charAt(2), 5, num+12);
+					draw_count(value[num-1][1]/100, 7, num+12);
+			}
+
+
+
+
+			canvas.addEventListener('mousedown', function(e) {
+				startX = e.offsetX;
+				startY = e.offsetY;
+				var which = e.which;
+
+			    if(which == "1") {
+			        left_click(startX, startY);
+			    } else {
+			        rigth_click(startX, startY);
+			    }
+			}, false);
+
+			function left_click(x,y) {
+				var x = point_to_grid(x);
+				var y = point_to_grid(y);
+				open_square(x,y);
+				if(y==11) {
+					location.reload();
+				}
+			}
+
+			function rigth_click(x,y) {
+				var x = point_to_grid(x);
+				var y = point_to_grid(y);
+				var number = grid_to_number(x,y);
+				if(opened_square.indexOf(number) == -1) {
+				if(flag_state.indexOf(number) == -1) {
+						flag_state.push(number);
+						draw_flag(x,y);
+					} else {
+						var color="#a365c7";
+						draw_rect(x,y,color);
+						flag_state.splice(flag_state.indexOf(number), 1);
+					}
+				}
+			}
+
+
+			function open_square(x,y) {
+				var number =  grid_to_number(x,y);
+				if(mine_position.indexOf(number) > -1) {
+					draw_bomb(x,y);
+					game_over();
+					return;
+				}
+				if(opened_square.indexOf(number) == -1 && number < grid_size*grid_size) {
+					opened_square.push(number);
+					var around_mine = check_around_mind(number);
+					var color = "#e3c584"
+					draw_rect(x,y,color);
+					draw_count(around_mine, x, y);
+					check_win();
+				}
+
+				if(around_mine == 0) {
+					open_arounders(number);
+				}
+
+			}
+
+			function check_win() {
+				if(opened_square.length == grid_size*grid_size-number_of_mine) {
+					alert("Happy New Year");
+					var name = prompt("Your Name?");
+          alert(name + "are winner");
+          location.reload();
+					// window.location.href = "submit.php?name=" + name + "&time=" + stopwatch;
+				}
+			}
+
+			function open_arounders(number) {
+				var arounder = [];
+				var mid = number;
+				var top = number-grid_size;
+				var bottom = number+grid_size;
+
+
+				if((mid+1)%grid_size != 0 && opened_square.indexOf(mid+1) == -1) {
+					open_square(number_to_gridX(mid+1),number_to_gridY(mid+1));
+				}
+				if(mid-1 > -1 && (mid-1)%grid_size != grid_size-1 && opened_square.indexOf(mid-1) == -1) {
+					open_square(number_to_gridX(mid-1),number_to_gridY(mid-1));
+				}
+				if(top > -1 && opened_square.indexOf(top) == -1) {
+					open_square(number_to_gridX(top),number_to_gridY(top));
+				}
+				if(top+1 > -1 && (top+1)%grid_size != 0 && opened_square.indexOf(top+1) == -1) {
+					open_square(number_to_gridX(top+1),number_to_gridY(top+1));
+				}
+				if(top-1 > -1 && (top-1)%grid_size != grid_size-1 && opened_square.indexOf(top-1) == -1) {
+					open_square(number_to_gridX(top-1),number_to_gridY(top-1));
+				}
+				if(bottom < grid_size*grid_size && opened_square.indexOf(bottom) == -1) {
+					open_square(number_to_gridX(bottom),number_to_gridY(bottom));
+				}
+				if(bottom+1 < grid_size*grid_size && (bottom+1)%grid_size != 0 && opened_square.indexOf(bottom+1) == -1) {
+					open_square(number_to_gridX(bottom+1),number_to_gridY(bottom+1));
+				}
+				if(bottom-1 < grid_size*grid_size && (bottom-1)%grid_size != grid_size-1 && opened_square.indexOf(bottom-1) == -1) {
+					open_square(number_to_gridX(bottom-1),number_to_gridY(bottom-1));
+				}
+			}
+
+			function check_around_mind(number) {
+				if (number in map_around_mind) {
+					return map_around_mind[number];
+				}
+				return 0;
+
+			}
+
+			function draw_bomb(x,y) {
+			context.beginPath();
+			context.arc(gap*x + square_size/2, gap*y + square_size/2, 20, 0, 2 * Math.PI, false);
+			context.fillStyle = '#000000';
+			context.fill();
+			context.lineWidth = 2;
+			context.strokeStyle = '#B22929';
+			context.stroke();
+			context.font="12px Arial";
+			context.fillStyle="#FFFFFF";
+			context.fillText("BOMB",x*gap+(square_size/6) ,y*gap+(square_size/1.7));
+			}
+
+
+
+			function point_to_grid(p) {
+				return (Math.floor(p/gap));
+			}
+
+			function grid_to_number(x,y) {
+				return (x + grid_size*y);
+			}
+
+			function number_to_gridX(number) {
+				return (number%grid_size);
+			}
+
+			function number_to_gridY(number) {
+				return (Math.floor(number/grid_size));
+			}
+
+			function create_grid(grid_size){
+				var color="#a365c7";
+				for(var i=0 ; i<grid_size ; i++) {
+					for (var j=0 ; j<grid_size ; j++){
+						draw_rect(i,j,color);
+					}
+				}
+			}
+
+			function set_mine(n) {
+				var rand_size = grid_size * grid_size;
+				for(var i=0 ; i<n ;) {
+					 var temp = Math.floor(Math.random() * rand_size);
+					 if(mine_position.indexOf(temp) == -1) {
+						 mine_position[i] = temp;
+						 i++;
+					 }
+				}
+
+				mine_position.forEach(function(e){
+					var mid = e;
+					var top = e-grid_size;
+					var bottom = e+grid_size;
+
+					if(e%grid_size==0){
+						map_around_mind[mid+1] = (map_around_mind[mid+1] || 0) + 1;
+						map_around_mind[top] = (map_around_mind[top] || 0) + 1;
+						map_around_mind[top+1] = (map_around_mind[top+1] || 0) + 1;
+						map_around_mind[bottom] = (map_around_mind[bottom] || 0) + 1;
+						map_around_mind[bottom+1] = (map_around_mind[bottom+1] || 0) + 1;
+					} else if(e%grid_size==grid_size-1) {
+						map_around_mind[mid-1] = (map_around_mind[mid-1] || 0) + 1;
+						map_around_mind[top] = (map_around_mind[top] || 0) + 1;
+						map_around_mind[top-1] = (map_around_mind[top-1] || 0) + 1;
+						map_around_mind[bottom] = (map_around_mind[bottom] || 0) + 1;
+						map_around_mind[bottom-1] = (map_around_mind[bottom-1] || 0) + 1;
+					} else {
+						map_around_mind[mid+1] = (map_around_mind[mid+1] || 0) + 1;
+						map_around_mind[mid-1] = (map_around_mind[mid-1] || 0) + 1;
+						map_around_mind[top] = (map_around_mind[top] || 0) + 1;
+						map_around_mind[top+1] = (map_around_mind[top+1] || 0) + 1;
+						map_around_mind[top-1] = (map_around_mind[top-1] || 0) + 1;
+						map_around_mind[bottom] = (map_around_mind[bottom] || 0) + 1;
+						map_around_mind[bottom+1] = (map_around_mind[bottom+1] || 0) + 1;
+						map_around_mind[bottom-1] = (map_around_mind[bottom-1] || 0) + 1;
+					}
+				});
+			}
+
+			function game_over() {
+				alert("GAME OVER");
+				location.reload();
+			}
+		}
+
+		window.onload = start;
+
+		function clock() {
+			sec = stopwatch/100;
+			msec = stopwatch%100;
+
+			hours = Math.floor(sec / 60);
+			minutes = Math.floor(sec % 60);
+			seconds = msec;
+
+
+			timeStr = ((hours < 10) ? " 0" : " ")+hours;
+			timeStr += ((minutes < 10) ? ":0" : ":") + minutes;
+			timeStr += ((seconds < 10) ? ":0" : ":") + seconds + " ";
+
+			stopwatch++;
+
+			return timeStr;
+		}
+
+		function set_timer() {
+			var time = clock();
+			for(var i=0 ; i<10 ; i++) {
+			draw_rect(i, 10, "#696969");
+			draw_count(time[i], i, 10);
+			}
+
+			setTimeout("set_timer()", 10);
+		}
+
+		function draw_rect(x,y,color) {
+			context.fillStyle=color;
+			context.fillRect(gap*x,gap*y,square_size,square_size);
+		}
+
+		function draw_flag(x,y) {
+			context.fillStyle="#f2ec3d";
+			context.fillRect(gap*x+10,gap*y+10,30,20);
+			context.fillStyle="#000000";
+			context.fillRect(gap*x+10,gap*y+9,3,30);
+/*
+			context.moveTo(gap*x+10,gap*y+10);
+			context.lineTo(gap*x+10,gap*y+40);
+			context.lineCap = 'round';
+			context.lineWidth=3;
+			context.stroke();
+*/
+		}
+
+		function draw_count(number_of_mine, x, y) {
+			context.font="39px Arial";
+			context.fillStyle="#FFFFFF";
+			context.fillText(number_of_mine,x*gap+(square_size/3.6) ,y*gap+(square_size/1.3));
+		}
+
+
+
+		</script>
+
+        <style type="text/css">
+        #wrap {
+	        display:table;
+        }
+        #canvas {
+        	display:table-cell;
+        	vertical-align:middle;
+        	margin: 0 auto;
+        }
+        #asc {
+	        margin: 0 auto;
+        }
+        </style>
+
+    </head>
+
+    <body>
+
+
+    	<div id = "wrap">
+	    	<a href="javascript:void(0)" on_click="" oncontextmenu="">
+	    	<canvas id="canvas" style="border: none;" width="0" height="0"></canvas>
+	    	</a>
+    	</div>
+    </body>
+
+</html>

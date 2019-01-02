@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="netflix.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="netflix.js"></script>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Invoice for Netflix</h1>
+						<p class="schedule-info"></p>
+            <p class="amount-info"></p>
+						<p class="accounts-info text-danger"></p>
+        </div>
+        <div class="container bg-faded">
+					<table class="table table-hover">
+					  <thead>
+					    <tr class="danger">
+					      <th>Name</th>
+					      <th>Payment</th>
+					      <th>Arrears</th>
+					      <th>Total Payment</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">YH Kang</th>
+					      <td class="payment"></td>
+					      <td>0</td>
+					      <td class="total"></td>
+					    </tr>
+					    <tr>
+					      <th scope="row">KW Park</th>
+					      <td class="payment"></td>
+					      <td>0</td>
+					      <td class="total"></td>
+					    </tr>
+					    <tr>
+					      <th scope="row">JS Park</th>
+								<td class="payment"></td>
+					      <td>0</td>
+					      <td class="total"></td>
+					    </tr>
+							<tr>
+								<th scope="row">SJ Choi</th>
+								<td class="payment"></td>
+					      <td>0</td>
+					      <td class="total"></td>
+							</tr>
+              <tr>
+								<th scope="row">Total</th>
+								<td class="payment-total"></td>
+					      <td>0</td>
+					      <td class="total-all"></td>
+							</tr>
+					  </tbody>
+					</table>
+          <div class="term-warpper">
+            <span class="term"><span>
+          </div>
+    	</div>
+      <div class="container">
+        <div class="invoice-chart">
+          <canvas id="invoice-chart" width="400" height="400"></canvas>
+        </div>
+        <div class="flow-chart">
+          <canvas id="flow-chart" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

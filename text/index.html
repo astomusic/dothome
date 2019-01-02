@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>KakaoTalk analyzer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" href="text.css"/>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  <div class="header">KakaoTalk analyzer For PC</div>
+  <div class="filebox">
+    <label for="ex_file">업로드 for Mac</label>
+    <input type="file" id="ex_file">
+    <input type='button' id='btnLoad' value='Load'>
+    <div class="padding"></div>
+    <label for="ex_file_win">업로드 for Win</label>
+    <input type="file" id="ex_file_win">
+    <input type='button' id='btnLoadforWin' value='Load'>
+  </div>
+  <div id="result"></div>
+	<div id="result_count"></div>
+  <div id="result_table"></div>
+  <div id="desc">
+    <div>How to Use? : Export Messages 또는 대화 내보내기로 파일로 저장 - 저장된 파일을 업로드 - 로드 버튼 클릭</div>
+    <div class="img">
+      <span><img src='ss.png'></span>
+      <span><img src='ww.jpeg'></span>
+    </div>
+    <div>카카오톡에서 메시지를 저장하는 동안 채팅창을 닫으면 메시지가 모두 저장되지 않습니다.</div>
+    <div>사용하는 OS에 맞지 앉는 경우 출력결과가 제대로 나오지 않습니다.</div>
+    <div><b>크롬 브라우져 - 맥용 카카오톡 Version 2.0.0</b> 버전에서 테스트 되었습니다. 다른 환경에서의 실행을 보장할수 없습니다.</div>
+    <div>사용자의 메시지를 별도로 저장하거나 보내지 않습니다.</div>
+  </div>
+  <div class="footer">Copyright <a href="mailto:asto1982@gmail.com">astomusic</a>. All rights reserved. </div>
+  <script src="text.js"></script>
+</body>
+</html>

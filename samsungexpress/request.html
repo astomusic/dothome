@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<title>삼성운수::SAMSUNGEXPRESS</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="viewport" content="width=320, initial-scale=0.5, minimum-scale=0.5, maximum-scale=1.0, user-scalable=1">
+
+<script language="JavaScript">
+	window.scrollTo(0, 0.9);
+</script>
+<script>
+var request = document.getElementsByName('request');
+var name = document.getElementsByName('name');
+var cellphone = document.getElementsByName('cellphone');
+var start = document.getElementsByName('start');
+var end = document.getElementsByName('end');
+
+function _submit() {
+	if(name[0].value == "") {
+		alert("please input name");
+	}
+	else if(cellphone[0].value  == "") {
+		alert("please input phone number");
+	}
+	else if(start[0].value  == "") {
+		alert("please input location");
+	}
+	else if(end[0].value  == "") {
+		alert("please input location");
+	}
+	else {
+		request[0].submit();
+	}
+}
+
+</script>
+</head> 
+
+<body>
+	<center>
+	<a href='#'><img src='./img/menu_6_c_top.png'>
+	<form method='get' id='request' name='request' align='center' action='submit.php'>
+		<div style="font-size:1.2em;">서비스<select name = 'type'>
+		<option value = '화물운송'>화물운송</option>
+		<option value = '원룸이사'>원룸이사</option>
+		<option value = '일반이사'>일반이사</option>
+		<option value = '포장이사'>포장이사</option>
+		<option value = '사무실이사'>사무실이사</option>
+		<option value = '기업운송'>기업운송</option>
+		<option value = '다마스퀵'>다마스퀵</option>
+		<option value = '퀵서비스'>퀵서비스</option>
+		</select>
+		운반일 <select name = 'year'>
+		<option value = '2013년'>2013년</option>
+		<option value = '2014년'>2014년</option>
+		<option value = '2015년'>2015년</option>
+		<option value = '2016년'>2016년</option>
+		<option value = '2017년'>2017년</option>
+		<option value = '2018년'>2018년</option>
+		<option value = '2019년'>2019년</option>
+		</select>
+		<select name = 'month'>
+		<option value = '1월'>1월</option>
+		<option value = '2월'>2월</option>
+		<option value = '3월'>3월</option>
+		<option value = '4월'>4월</option>
+		<option value = '5월'>5월</option>
+		<option value = '6월'>6월</option>
+		<option value = '7월'>7월</option>
+		<option value = '8월'>8월</option>
+		<option value = '9월'>9월</option>
+		<option value = '10월'>10월</option>
+		<option value = '11월'>11월</option>
+		<option value = '12월'>12월</option>
+		</select>
+		<select name = 'day'>
+		<option value = '1일'>1일</option>
+		<option value = '2일'>2일</option>
+		<option value = '3일'>3일</option>
+		<option value = '4일'>4일</option>
+		<option value = '5일'>5일</option>
+		<option value = '6일'>6일</option>
+		<option value = '7일'>7일</option>
+		<option value = '8일'>8일</option>
+		<option value = '9일'>9일</option>
+		<option value = '10일'>10일</option>
+		<option value = '11일'>11일</option>
+		<option value = '12일'>12일</option>
+		<option value = '13일'>13일</option>
+		<option value = '14일'>14일</option>
+		<option value = '15일'>15일</option>
+		<option value = '16일'>16일</option>
+		<option value = '17일'>17일</option>
+		<option value = '18일'>18일</option>
+		<option value = '19일'>19일</option>
+		<option value = '20일'>20일</option>
+		<option value = '21일'>21일</option>
+		<option value = '22일'>22일</option>
+		<option value = '23일'>23일</option>
+		<option value = '24일'>24일</option>
+		<option value = '25일'>25일</option>
+		<option value = '26일'>26일</option>
+		<option value = '27일'>27일</option>
+		<option value = '28일'>28일</option>
+		<option value = '29일'>29일</option>
+		<option value = '30일'>30일</option>
+		<option value = '31일'>31일</option>
+		</select>
+		</div>
+		<input name='start' id='start' placeholder='출발지주소'></input><br>
+		<input name='end' id='end' placeholder='도착지주소'></input><br>
+		<input name='name' id='name' placeholder='고객명'></input><br>
+		<input name='cellphone' id='cellphone' placeholder='휴대폰번호'></input>
+	</form>
+	</center>
+	<div>
+	<a href='javascript:_submit();'><img src='./img/menu_6_b_left.png' width="310"></a><a href="tel:080-580-2482"><img src='./img/menu_6_b_right.png' width="310"></a>
+	<a href='#'><img src='./img/menu_6_b.png'></a>
+	</div>
+	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://rawgithub.com/mathiasbynens/jquery-placeholder/master/jquery.placeholder.js"></script>
+<script>
+   $(function() {
+    $('input, textarea').placeholder();
+   });
+  </script>
+</body>
+</html>

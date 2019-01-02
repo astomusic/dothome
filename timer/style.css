@@ -1,0 +1,143 @@
+body {
+  background: #ccc;
+  font-family: Tahoma, Geneva, sans-serif
+}
+
+svg {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.filler {
+  background: #20B7AF;
+  position: absolute;
+  bottom: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.setter {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  margin-top: -25px;
+  z-index: 100;
+}
+
+.setter label {
+  color: #20B7AF;
+  font-size: 20px;
+  padding-right: 10px;
+}
+
+.setter input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  width: 50px;
+  font-size: 30px;
+  color: #20B7AF;
+  text-align: center;
+  border-bottom: solid 2px #20B7AF;
+  transition: border 0.3s;
+}
+.setter input[type="text"]:focus,
+.setter input[type="text"].focus {
+  border-bottom: solid 2px #000 ;
+}
+
+.setter .start {
+  margin-left: 30px;
+  color: #20B7AF;
+  font-size: 20px;
+  transition: all 0.3s; 
+}
+.setter #submit:hover {
+  margin-left: 30px;
+  color: #FFF;
+  cursor:pointer;
+}
+
+.stop, .play, .pause{
+  height:100px;
+  width:100px;
+  margin-top: -50px;
+  display: block;
+  position:absolute;
+  top: 50%;
+  left: 80%;
+
+  transition:.2s; 
+}
+
+.elm{
+  border-radius:8px;
+  background:#fff;
+  transition:.2s;
+  position:absolute;
+}
+
+.top{
+  width:100px;
+  height:16px;
+  top:0;
+  left:0;
+}
+
+.right{
+  width:16px;
+  height:100px;
+  top:0;
+  left:84px;
+}
+
+.bottom{
+  width:100px;
+  height:16px;
+  top:84px;
+  left:0;
+}
+
+.left{
+  width:16px;
+  height:100px;
+  top:0;
+  left:0;
+}
+
+.play{
+  transform:rotate(-90deg);
+}
+.play .right{
+  transform-origin:center top;
+  transform:rotate(29deg) translate(4px, 2px);
+}
+.play .bottom{
+  display:none;
+}
+.play .left{
+  transform-origin:center top;
+  transform:rotate(-29deg) translate(-4px, 2px)
+}
+
+.pause{
+  transform:rotate(180deg);
+}
+.pause .top{
+  opacity:0;
+}
+.pause .right{
+  transform:translateX(-16px) scale(0.9);
+}
+.pause .bottom{
+  opacity:0;
+}
+.pause .left{
+  transform:translateX(16px) scale(0.9);
+}

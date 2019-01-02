@@ -1,0 +1,38 @@
+body, dt, dd { margin:0; padding:0 }
+img { border:0; }
+a { border:0;  text-decoration:none; }
+ul { list-style:none; }
+select { font-size:12pt; vertical-align:middle; }
+
+#wrap { width:640px; margin:0; }
+.goEst { width:640px; margin:0 auto; text-align:center; padding:40px 0px; }
+
+.tarea { position:relative; top:100px; left:50px; border:0px; font-size:24px; }
+.inputtxt { position:absolute; top:300px; left:50px; border:0px; }
+.trans { position:absolute; top:300px; left:200px; }
+.est_txt { padding:20px 0px; }
+.est { width:500px; margin:0px auto; padding:30px; border:2px dashed #ccc; border-radius:20px; }
+#copyright { padding-bottom:20px; }
+
+.localyd { width:640px; margin:0 auto; margin-bottom:14px; }
+.localyd dt { margin-bottom:5px; }
+.localyd dd { width:585px; margin:0 20px; padding:10px 0px 10px 15px; border-bottom:1px dashed #ccc; font-size:12pt; color:#66cc66; letter-spacing:12px; }
+.localyd a { font-size:1em; color:#666; letter-spacing:-1px; text-decoration:none; padding-right:8px; }
+.localyd a:hoaver { font-size:1em; color:#666; letter-spacing:-1px; text-decoration:underline; }
+
+.localyd2 { width:640px; margin:0 auto; margin-bottom:14px; }
+.localyd2 dt { margin-bottom:5px; }
+.localyd2 dd { width:585px; margin:0 20px; padding:10px 0px 10px 15px; border-bottom:1px dashed #ccc; font-size:12pt; color:#66cc66; letter-spacing:12px; }
+.localyd2 a { font-size:1.5em; color:#666; letter-spacing:-1px; text-decoration:none; padding-right:8px; }
+.localyd2 a:hoaver { font-size:1.5em; color:#666; letter-spacing:-1px; text-decoration:underline; }
+
+.placeholder { color: #aaa; }
+
+#mBottom { margin-bottom:20px; }
+#mBottom40 { margin-bottom:40px; }
+
+#name { font-size:20pt; width:495px; }
+#cellphone { font-size:20pt; width:495px; }
+#start { font-size:20pt; width:495px; }
+#end { font-size:20pt; width:495px; }
+#request { margin: 0 auto; }

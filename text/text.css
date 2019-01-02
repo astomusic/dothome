@@ -1,0 +1,74 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+body {
+  font-family: 'Noto Sans KR';
+  font-size:10pt;
+  font-weight: 300;
+  margin: 0;
+}
+
+.header {
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #5a4647;
+  background-color: #fef419
+}
+
+.filebox {
+  padding: 10px;
+  background-color: #eee;
+}
+
+.padding {
+  padding: 10px;
+}
+
+label {
+  display: block;
+  width: 100px;
+}
+
+#btnLoad, #ex_file, #ex_file_win, #btnLoadforWin {
+  padding: 10px;
+  background-color: #eee;
+}
+
+#result {
+  padding: 10px;
+  background-color: #dde;
+}
+
+#result button {
+  padding: 10px 0;
+  width: 100px;
+  margin: 0 2px;
+}
+
+#result_count {
+  padding: 20px;
+  background-color: #eee;
+}
+
+#result_table {
+  padding: 20px;
+  background-color: #eee;
+}
+
+#result_table div {
+  padding: 2px 0;
+}
+
+#desc {
+  padding: 10px;
+}
+
+#desc img {
+  width: 400px;
+  height: 400px
+}
+
+.footer {
+  background-color: #eee;
+  padding: 10px;
+  text-align: center;
+}

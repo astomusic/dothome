@@ -1,0 +1,190 @@
+@charset "UTF-8";
+/*----------------------------------------------------------------------------- 
+[client] Screen Stylesheet 
+
+version:   1.0 
+date:      01/03/07 
+author:    SHAKO
+email:     kimshako@gmail.com 
+website:   http://www.pageburn.co.kr 
+version history: 1.0
+-----------------------------------------------------------------------------*/
+
+/* Remove padding and margin */ 
+* 
+{ 
+	margin: 0; 
+	padding: 0; 
+	border: 0; 
+}
+
+body 
+{ 
+	font: 62.5%/1.5  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; 
+	background-color: #FFFFFF; 
+	color: #000000;     
+	text-align:center; 
+	margin: 0;
+}
+
+#wrapper
+{ 
+	width: 690px;
+	margin: 0 auto;
+	padding: 10px 0;
+	text-align: left;
+	background-color: #0978ac;
+}
+
+#center
+{
+	width: 670px;
+	margin: 0 10px;
+	text-align: left;
+	background-color: #FFFFFF;
+}
+
+h1 
+{ 
+	font-size: 2.2em; 
+} 
+     
+h2 
+{ 
+	font-size: 2.0em;     
+} 
+     
+h3 
+{ 
+	font-size: 1.8em; 
+} 
+     
+h4 
+{ 
+	font-size: 1.6em;     
+} 
+     
+h5 
+{ 
+	font-size: 1.4em;     
+} 
+     
+p 
+{ 
+	font-size: 1.2em;     
+}
+
+hr
+{
+	height: 20px;
+	color: #FFFFFF;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.answer
+{
+	margin-bottom: 5px;
+}
+
+.answer .number
+{
+	width: 30px;
+	float: left;
+	display: inline;
+}
+
+.answer .input
+{
+	width: 640px;
+	float: left;
+	display: inline;
+}
+
+.answer .input textarea
+{
+	width: 615px;
+	height: 71px;
+	border: 2px solid #c7c7c7;
+}
+
+.answer .input_half1
+{
+	width: 300px;
+	float: left;
+	display: inline;
+	margin: 0 10px 0 0;
+}
+
+.answer .input_half1 textarea
+{
+	width: 296px;
+	height: 71px;
+	border: 2px solid #c7c7c7;
+}
+
+.answer .input_half2
+{
+	width: 310px;
+	float: left;
+	display: inline;
+}
+
+.answer .input_half2 textarea
+{
+	width: 306px;
+	height: 71px;
+	border: 2px solid #c7c7c7;
+}
+
+.answer .input_quarter1
+{
+	width: 150px;
+	float: left;
+	display: inline;
+	margin: 0 10px 0 0;
+}
+
+.answer .input_quarter1 textarea
+{
+	width: 146px;
+	height: 71px;
+	border: 2px solid #c7c7c7;
+}
+
+.answer .input_quarter2
+{
+	width: 460px;
+	float: left;
+	display: inline;
+}
+
+.answer .input_quarter2 textarea
+{
+	width: 456px;
+	height: 71px;
+	border: 2px solid #c7c7c7;
+}
+
+.personal .question
+{
+	width: 130px;
+	float: left;
+	display: inline;
+	margin: 0 10px;
+}
+
+.personal .answer
+{
+	width: 180px;
+	float:left;
+	display: inline;
+}
+
+.personal
+{
+	font-size: 16px;
+}

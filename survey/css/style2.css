@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/*----------------------------------------------------------------------------- 
+[client] Screen Stylesheet 
+
+version:   1.0 
+date:      01/03/07 
+author:    SHAKO
+email:     kimshako@gmail.com 
+website:   http://www.pageburn.co.kr 
+version history: 1.0
+-----------------------------------------------------------------------------*/
+
+/* Remove padding and margin */ 
+* 
+{ 
+	margin: 0; 
+	padding: 0; 
+}
+
+body 
+{ 
+	font: 62.5%/1.5  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif; 
+	background-color: #FFFFFF; 
+	color: #000000;     
+	text-align:center; 
+	margin: 0;
+}
+
+#wrapper
+{ 
+	width: 690px;
+	margin: 0 auto;
+	padding: 10px 0;
+	text-align: left;
+	background-color: #0978ac;
+}
+
+#center
+{
+	width: 670px;
+	margin: 0 10px;
+	text-align: left;
+	background-color: #FFFFFF;
+}
+
+h1 
+{ 
+	font-size: 2.2em; 
+} 
+
+h2 
+{ 
+	font-size: 2.0em;
+} 
+
+p 
+{ 
+	font-size: 1.2em;
+}
+
+hr
+{
+	height: 20px;
+	color: #FFFFFF;
+	border: 0;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.answer
+{
+	width: 650px;
+	margin: 0 0px 5px 10px;
+}
+
+.answer .item
+{
+	display: block;
+	position: relative;
+}
+
+.answer .item2
+{
+	width: 650px;
+	display: block;
+	position: relative;
+	background-color: #efefef;
+}
+
+.answer .tag
+{
+	width: 320px;
+	display2: inline;
+	font-size: 12px;
+	font-family: '돋움', AppleGothic;
+	color: #333333;
+	padding: 4px 0 0px 0;
+	margin: 0 0 0 25px;
+}
+
+.answer .check
+{
+	position: relative;
+	float: right;
+	display: inline;
+	width: 60px;
+	text-align: center;
+	font-size:14px;
+	padding: 2px 0 2px 0;
+}
+
+.answer .check
+{
+}
+
+.personal .question
+{
+	width: 130px;
+	float: left;
+	display: inline;
+	margin: 0 10px;
+}
+
+.personal .answer
+{
+	width: 180px;
+	float:left;
+	font-size: 14px;
+	display: inline;
+}

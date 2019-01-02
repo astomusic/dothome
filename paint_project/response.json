@@ -1,0 +1,17 @@
+{
+	"color" : {
+					"black" : "black",
+					"green" : "green",
+					"red" : "red"
+					"orange" : "orange"
+					"yellow" : "yellow"
+					"blue" : "blue"
+					"white" : "white"
+					"brown" : "brown"
+				}
+	"brush" : {
+					"inkpen" : "inkpen"
+					"brush" : "brush"
+					"chalk" : "chalk"
+				}
+}

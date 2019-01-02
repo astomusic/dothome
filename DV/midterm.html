@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>DV - Mid Term Project</title>
+		<link rel="stylesheet" href="midterm.css">
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<style type="text/css">
+			body {
+				background-image: url("map.png");
+				background-repeat: no-repeat;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container_button">
+			<div id="hole">
+				<div id="button">
+					<div id="triangle"></div>
+					<div id="lighter_triangle"></div>
+					<div id="darker_triangle"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			//bg map coordination data(왼쪽 상단)
+			var mapinfo = {x:127.1042338, y:37.4035197};
+			var timeinfo = {start:"24:10", end:"37:3", current:"24:10"};
+			//개인별 좌표, 사진, 소리, 조도 데이터
+			var dataSet = [ { id:"choi", x:127.107711791992188, y:37.402935028076172, photo:"", data:[], dataindex:0, toggle:0 }, 
+							{ id:"son", x:127.107925415039062, y:37.402042388916016, photo:"", data:[], dataindex:0, toggle:0 },
+							{ id:"kim", x:127.112922668457031, y:37.398658752441406, photo:"", data:[], dataindex:0, toggle:0 },
+							{ id:"jang", x:127.106605529785156, y:37.401020050048828, photo:"", data:[], dataindex:0, toggle:0 },
+							{ id:"yang", x:127.108749389648438, y:37.401588439941406, photo:"", data:[], dataindex:0, toggle:0 },
+							{ id:"jung", x:127.109169006347656, y:37.402290344238281, photo:"", data:[], dataindex:0, toggle:0 },
+							{ id:"jin", x:127.109298706054688, y:37.401809692382812, photo:"", data:[], dataindex:0, toggle:0 },
+						];
+			dataSet.dataSetLength = dataSet.length;
+			namingData(dataSet);
+			coordToPixAll(dataSet);
+
+			//Width and height 877 × 572
+			var w = 877;
+			var h = 572;
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+			d3.csv("data/choi_data.csv", function(data) { 
+				dataSet.choi.data = data;
+			});
+			d3.csv("data/son_data.csv", function(data) { 
+				dataSet.son.data = data;
+			});
+			d3.csv("data/kim_data.csv", function(data) { 
+				dataSet.kim.data = data;
+			});
+			d3.csv("data/jang_data.csv", function(data) { 
+				dataSet.jang.data = data;
+			});
+			d3.csv("data/yang_data.csv", function(data) { 
+				dataSet.yang.data = data;
+			});
+			d3.csv("data/jung_data.csv", function(data) { 
+				dataSet.jung.data = data;
+			});
+			d3.csv("data/jin_data.csv", function(data) { 
+				dataSet.jin.data = data;
+				generateVisualization();
+				// draw();
+				// var circle2 = $("circle");
+				// var event = document.createEvent("HTMLEvents");
+				// event.initEvent("click",true,false);
+				// circle2[0].dispatchEvent(event);
+				
+			});
+
+			// var toggle = 0;
+			var interval;
+
+			var generateVisualization = function() {
+				
+				var updatedData = makeDataSet();
+
+				var circles = svg.selectAll("circle")
+							 .data(dataSet)
+                     		 .enter()
+                    		 .append("circle");
+                    		 // .style("opacity", 0.5);
+
+	            circles.attr("cx", function(d) { return d.px; })
+	            	   .attr("cy", function(d) { return d.py; })
+	            	   .attr("id", function(d) { return d.id; })
+	            	   .attr("r", function(d, i) {
+	            	   		return updatedData[i].sound;
+	            	   	})
+	            	   .attr("fill", function(d, i) {
+		            	   	var light = updatedData[i].light;
+		            	   	var result = "rgba("+light+","+light+","+light+", 0.80)";
+		            	   	return result;
+	            	   }) 
+	            	   .attr("stroke", "white");
+	           	//Create labels
+				svg.selectAll("text")
+				   .data(dataSet)
+				   .enter()
+				   .append("text")
+				   .text(function(d) { return d.id; })
+				   .attr("text-anchor", "middle")
+				   .attr("x", function(d) { return d.px; })
+				   .attr("y", function(d) { return d.py; })
+				   .attr("font-family", "sans-serif")
+				   .attr("font-size", "11px")
+				   .attr("fill", "white");
+
+				svg.append("text")
+				   .attr("id", "currentTime")
+				   .attr("x", 100)
+		 	       .attr("y", 500)
+		 	       .attr("font-family", "sans-serif")
+				   .attr("font-size", "20px")
+				   .attr("fill", "white")
+				   .text("Current Time - 17:" + timeinfo.current);
+
+				svg.append("text")
+				   .attr("x", 100)
+		 	       .attr("y", 520)
+		 	       .attr("font-family", "sans-serif")
+				   .attr("font-size", "20px")
+				   .attr("fill", "white")
+			 	   .text("Dec 5 2014, Around H-Square in Pangyo");
+
+			 	svg.append("text")
+				   .attr("x", 100)
+		 	       .attr("y", 540)
+		 	       .attr("font-family", "sans-serif")
+				   .attr("font-size", "20px")
+				   .attr("fill", "white")
+			 	   .text("NHNNEXT Data Visualization MidTerm Project");
+
+				d3.selectAll("#button").on("mousedown", function(e) {
+					console.log("down");
+					interval = setInterval(runUpdate, 300);
+				});
+
+				d3.selectAll("#button").on("mouseup", function(e) {
+					console.log("up");
+					clearInterval(interval);
+				});
+
+				d3.selectAll("circle").on("mouseover", function(e) {
+					console.log("over");
+
+					var x = dataSet[this.id].px;
+					var y = dataSet[this.id].py;
+
+					if(this.id == "kim") {
+						x = x - 200;
+						y = y - 200;
+					}
+
+
+					svg.append("image")
+					   .attr('x', x)
+					   .attr('y', y)
+					   .attr('width', 200)
+					   .attr('height', 200)
+					   .attr("xlink:href","image/" + this.id + ".jpg");
+					
+					d3.select(this)
+					  .attr("fill", "rgba(200, 0, 0, 0.80)");
+				});
+
+				d3.selectAll("circle").on("mouseout", function(e) {
+					console.log("out");
+
+					svg.selectAll("image")
+					   .remove();
+
+					if(e.light) {
+						var light = e.light;
+						d3.select(this)
+					 	  .attr("fill","rgba("+light+","+light+","+light+", 0.80)");
+					} else {
+						var light = dataSet[e.id].data[e.dataindex].light;
+						d3.select(this)
+						  .attr("fill","rgba("+light+","+light+","+light+", 0.80)");
+					}
+					
+				});
+
+	           	d3.selectAll("circle").on("update", function(e) {
+					console.log("update");
+					
+					var updatedData = makeDataSet();
+					//Update all rects
+					svg.selectAll("circle")
+					   .data(updatedData)
+					   .transition()
+					   // .duration(100)
+					   .attr("r", function(d) {
+            	   			return d.sound;
+            	  	 	})
+					   .attr("fill", function(d) {
+		            	   	var light = d.light;
+		            	   	var result = "rgba("+light+","+light+","+light+", 0.80)";
+		            	   	return result;
+		            	});
+		            //update labels
+					// svg.selectAll("text")
+					//    .data(updatedData) 
+					//    .transition()
+					//    // .duration(100)
+					//    .text(function(d) {
+				 //   			return timeToString(d.time);
+				 // 	   });
+
+				 	svg.select("#currentTime")
+				 	   .transition()
+				 	   .text("Current Time - 17:" + timeinfo.current);
+				});
+	           	
+			};
+
+			function timeToString(time) {
+				var res = time.substring(8, 13);
+				if(res[res.length-1] == ":") { 
+					var res = res.substring(0, 4);
+				}
+				return res;
+			}
+
+			function runUpdate() {
+				var circle2 = $("circle");
+				var event = document.createEvent("HTMLEvents");
+				event.initEvent("update",true,false);
+				circle2[0].dispatchEvent(event);
+			}
+
+			function makeDataSet() {
+				var result = [];
+
+				for(var i=0 ; i<dataSet.dataSetLength ; i++) {
+					var index = dataSet[i].dataindex
+					var recordTime =  dataSet[i].data[index].time;
+					var time = timeToString(recordTime);
+					if(timeinfo.current == time) {
+						result.push(dataSet[i].data[index]);
+						dataSet[i].dataindex = dataSet[i].dataindex + 10;
+					} else {
+						result.push({time:recordTime, light:"0", sound:"0"});
+					}
+				}
+
+				increaseCurrentTime()
+
+				return result;
+			}
+
+			function increaseCurrentTime() {
+				var times = timeinfo.current.split(":");
+				times[0] *= 1;
+				times[1] *= 1;
+
+				times[1]++;
+
+				if(times[1] == 60) {
+					times[0]++;
+					times[1] = 0;
+				}
+
+				var result = times[0] + ":" + times[1];
+
+				if(result >= timeinfo.end) {
+					result = timeinfo.start;
+				}
+
+				timeinfo.current = result;
+			}
+
+			function setData(dataSet) {
+				for(var key in dataSet) {
+					var csv = "data/" + dataSet[key].id + "_data.csv";
+					console.log(csv);
+					d3.csv(csv, function(data) { 
+						dataSet[key].data = data;
+						G_COUNT--;
+						console.log(G_COUNT);
+						if(G_COUNT == 0) {
+							generateVisualization();
+						}
+
+					});
+				}
+			}
+			//데이터에 이름으로 접근할수 있도록 해주기
+			function namingData(dataSet) {
+				for(var key in dataSet) {
+					var id = dataSet[key].id;
+					dataSet[id] = dataSet[key];
+				}
+			}
+			//도를 라디안으로 바꾸기
+            function degToRad(deg) {
+            	return deg*(Math.PI/180);
+            }
+            //코사인 값 리턴
+            function cos(deg) {
+            	return Math.cos(degToRad(deg));
+            }
+            //모든 데이터의 좌표를 픽셀위치로 수정하기
+            function coordToPixAll(dataSet) {
+	            for(var name in dataSet) {
+					coordToPix(dataSet[name]);
+				}
+            }
+            function coordToPix(target){
+            	// 위도1도에 약 130km 
+				// 경도1도에 약 130km * cos위도
+				// 약 100m가 110~114px
+            	target.py = Math.abs(mapinfo.y - target.y) * 130000 * (100/114);
+            	target.px = Math.abs(mapinfo.x - target.x) * 130000 * cos(target.y) * (100/110);
+            }
+		</script>
+
+	</body>
+</html>

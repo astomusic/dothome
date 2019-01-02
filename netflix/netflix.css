@@ -1,0 +1,30 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+body {
+  font-family: 'Noto Sans KR';
+  font-size:10pt;
+  font-weight: 300;
+  margin: 0;
+}
+
+.term-warpper {
+  text-align: right;
+}
+
+th {
+  text-align: center;
+}
+
+.table {
+  text-align: right;
+}
+
+.invoice-chart {
+  width: 700px;
+  margin: 0 auto;
+}
+
+.flow-chart {
+  width: 700px;
+  margin: 0 auto;
+  margin-top: -200px;
+}

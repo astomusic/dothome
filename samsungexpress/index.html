@@ -1,0 +1,216 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<title>삼성운수::SAMSUNGEXPRESS</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+<meta name="viewport" content="width=320, initial-scale=0.5, minimum-scale=0.5, maximum-scale=1.0, user-scalable=1">
+
+<script language="JavaScript">
+	window.scrollTo(0, 0.9);
+</script>
+</head> 
+
+<body>
+<div id="wrap">
+	<!-- top -->
+	<div id="top">
+	<a href="./index.html"><img src="./img/top_logo.png"></a><a href="tel:080-580-2482"><img src="./img/top_tel.png"></a><br>
+	<a><img src="./img/menu_1.png"></a><a><img src="./img/menu_2.png"></a><a><img src="./img/menu_3.png"></a><a><img src="./img/menu_4.png"></a><a><img src="./img/menu_5.png"></a><a><img src="./img/menu_6.png"></a>
+	</div>
+	
+	<!-- 메인 -->
+<div id="mid">
+	<div id="main" style="padding-bottom:15px;">
+		<img src="./img/main_img.png">
+	</div>
+</div>
+
+	<!-- 지역  -->
+<div id="local">
+	<a href="#"><img src="./img/b1_seoul.png"></a><a href="#"><img src="./img/b2_kk.png"></a><a href="#"><img src="./img/b3_ic.png"></a><a href="#"><img src="./img/b4_dj.png"></a><a href="#"><img src="./img/b5_kj.png"></a><a href="#"><img src="./img/b6_dg.png"></a><br>
+	<a href="#"><img src="./img/b7_ps.png"></a><a href="#"><img src="./img/b8_us.png"></a><a href="#"><img src="./img/b9_kw.png"></a><a href="#"><img src="./img/b10_cb.png"></a><a href="#"><img src="./img/b11_cn.png"></a><a href="#"><img src="./img/b12_jb.png"></a><br>
+	<a href="#"><img src="./img/b13_jn.png"></a><a href="#"><img src="./img/b14_kb.png"></a><a href="#"><img src="./img/b15_kn.png"></a><a href="#"><img src="./img/b16_lift.png"></a><a href="#"><img src="./img/b17_wing.png"></a><a href="#"><img src="./img/b18_non.png"></a><br>
+	<a href="#"><img src="./img/bb1_carinfo.png"></a><a href="#"><img src="./img/bb2_request.png"></a><a href="tel:080-580-2482"><img src="./img/bb3_client.png"></a></a><br>
+</div>
+
+
+	<!-- bottom -->
+	<div id="bottom">
+	<a href="tel:080-580-2482"><img src="./img/bottom.png"></a>
+	</div>
+	
+</div>
+
+<script>
+//window.addEventListener('load', function() {
+	if(document.addEventListener) {
+		var mid = document.querySelector('#mid');
+		var ellocal = document.querySelector('#local');
+		var menu = document.querySelectorAll('#top a');
+		var local = document.querySelectorAll('#local a');
+	}
+	else if (document.attachEvent){
+		var mid = document.getElementById('mid');
+		var top = document.getElementById('top');
+		var ellocal = document.getElementById('local');
+		var menu = top.getElementsByTagName('a');
+		var local = ellocal.getElementsByTagName('a');
+	}
+	
+	function clear() { this.value=''; }
+	
+	function click_m1() {
+		mid.innerHTML="<iframe src='request.html' width=100% height=650 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+		ellocal.innerHTML=""
+	};
+	function click_m2() {
+		mid.innerHTML="<img src='./img/menu_2_c.png'>"
+		ellocal.innerHTML=""
+	};
+	function click_m3() {
+		mid.innerHTML="<img src='./img/menu_3_c.png'>"
+		ellocal.innerHTML=""
+	};
+	function click_m4() {
+		mid.innerHTML="<img src='./img/menu_4_c.png'>"
+		ellocal.innerHTML=""
+	};
+	function click_m5() {
+		mid.innerHTML="<img src='./img/menu_5_c.png'>"
+		ellocal.innerHTML=""
+	};
+	function click_m6() {
+		mid.innerHTML="<iframe src='request.html' width=100% height=650 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+		ellocal.innerHTML=""
+	};
+	function local_m1() {
+		mid.innerHTML="<iframe src='seoul.html' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m2() {
+		mid.innerHTML="<iframe src='local.php?id=local_kk&name=경기지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m3() {
+		mid.innerHTML="<iframe src='local.php?id=local_ic&name=인천지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m4() {
+		mid.innerHTML="<iframe src='local.php?id=local_dj&name=대전지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m5() {
+		mid.innerHTML="<iframe src='local.php?id=local_kj&name=광주지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m6() {
+		mid.innerHTML="<iframe src='local.php?id=local_dg&name=대구지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m7() {
+		mid.innerHTML="<iframe src='local.php?id=local_ps&name=부산지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m8() {
+		mid.innerHTML="<iframe src='local.php?id=local_us&name=울산지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m9() {
+		mid.innerHTML="<iframe src='local.php?id=local_kw&name=강원지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m10() {
+		mid.innerHTML="<iframe src='local.php?id=local_cb&name=충북지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m11() {
+		mid.innerHTML="<iframe src='local.php?id=local_cn&name=충남지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m12() {
+		mid.innerHTML="<iframe src='local.php?id=local_jb&name=전북지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m13() {
+		mid.innerHTML="<iframe src='local.php?id=local_jn&name=전남지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m14() {
+		mid.innerHTML="<iframe src='local.php?id=local_kb&name=경북지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m15() {
+		mid.innerHTML="<iframe src='local.php?id=local_kn&name=경남지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m16() {
+		mid.innerHTML="<iframe src='local.php?id=local_jj&name=리프트차량' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m17() {
+		mid.innerHTML="<iframe src='local.php?id=local_wing&name=윙바디탑차' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m18() {
+		mid.innerHTML="<iframe src='local.php?id=local_non&name=무진동차량' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+	function local_m19() {
+		mid.innerHTML="<a href='#'><img src='./img/menu_1_c.png'>"
+	};
+	function local_m20() {
+		mid.innerHTML="<iframe src='request.html' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=no>"
+	};
+	
+	
+	//menu[2].addEventListener('click', function(e){
+	//console.log(e.target , e.type, e.clientX);}, false);
+	
+	if(menu[2].addEventListener) {
+		menu[2].addEventListener('click', click_m1, false);
+		menu[3].addEventListener('click', click_m2, false);
+		menu[4].addEventListener('click', click_m3, false);
+		menu[5].addEventListener('click', click_m4, false);
+		menu[6].addEventListener('click', click_m5, false);
+		menu[7].addEventListener('click', click_m6, false);
+		
+		local[0].addEventListener('click', local_m1, false);
+		local[1].addEventListener('click', local_m2, false);
+		local[2].addEventListener('click', local_m3, false);
+		local[3].addEventListener('click', local_m4, false);
+		local[4].addEventListener('click', local_m5, false);
+		local[5].addEventListener('click', local_m6, false);
+		local[6].addEventListener('click', local_m7, false);
+		local[7].addEventListener('click', local_m8, false);
+		local[8].addEventListener('click', local_m9, false);
+		local[9].addEventListener('click', local_m10, false);
+		local[10].addEventListener('click', local_m11, false);
+		local[11].addEventListener('click', local_m12, false);
+		local[12].addEventListener('click', local_m13, false);
+		local[13].addEventListener('click', local_m14, false);
+		local[14].addEventListener('click', local_m15, false);
+		local[15].addEventListener('click', local_m16, false);
+		local[16].addEventListener('click', local_m17, false);
+		local[17].addEventListener('click', local_m18, false);
+		local[18].addEventListener('click', local_m19, false);
+		local[19].addEventListener('click', local_m20, false);
+	} 
+	else if(menu[2].attachEvent) {
+		menu[2].attachEvent('onclick', click_m1);
+		menu[3].attachEvent('onclick', click_m2);
+		menu[4].attachEvent('onclick', click_m3);
+		menu[5].attachEvent('onclick', click_m4);
+		menu[6].attachEvent('onclick', click_m5);
+		menu[7].attachEvent('onclick', click_m6);
+		
+		local[0].attachEvent('onclick', local_m1);
+		local[1].attachEvent('onclick', local_m2);
+		local[2].attachEvent('onclick', local_m3);
+		local[3].attachEvent('onclick', local_m4);
+		local[4].attachEvent('onclick', local_m5);
+		local[5].attachEvent('onclick', local_m6);
+		local[6].attachEvent('onclick', local_m7);
+		local[7].attachEvent('onclick', local_m8);
+		local[8].attachEvent('onclick', local_m9);
+		local[9].attachEvent('onclick', local_m10);
+		local[10].attachEvent('onclick', local_m11);
+		local[11].attachEvent('onclick', local_m12);
+		local[12].attachEvent('onclick', local_m13);
+		local[13].attachEvent('onclick', local_m14);
+		local[14].attachEvent('onclick', local_m15);
+		local[15].attachEvent('onclick', local_m16);
+		local[16].attachEvent('onclick', local_m17);
+		local[17].attachEvent('onclick', local_m18);
+		local[18].attachEvent('onclick', local_m19);
+		local[19].attachEvent('onclick', local_m20);
+	}
+//}, false);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<title>삼성운수::SAMSUNGEXPRESS</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<meta name="viewport" content="width=320, initial-scale=0.5, minimum-scale=0.5, maximum-scale=1.0, user-scalable=1">
+
+<script language="JavaScript">
+	window.scrollTo(0, 0.9);
+</script>
+</head> 
+
+<body>
+	<div id = 'seoul_mid'>
+	<img src ='./img/local_midtop.png'><br>
+	<div style = 'position:relative; left:2.5em; font-size:14px;'><b>서울 지역 우수업체 현황</b></div><br>
+		<span style = 'position:relative; left:2.5em; font-size:14px;'><b>지역구 선택   </b>
+		<select name = "local_seoul">
+			<option value="">강남구</option>
+			<option value="">강동구</option>
+			<option value="">강북구</option>
+			<option value="">강서구</option>
+			<option value="">관악구</option>
+			<option value="">광진구</option>
+			<option value="">구로구</option>
+			<option value="">금천구</option>
+			<option value="">노원구</option>
+			<option value="">도봉구</option>
+			<option value="">동대문구</option>
+			<option value="">동작구</option>
+			<option value="">마포구</option>
+			<option value="">서대문구</option>
+			<option value="">서초구</option>
+			<option value="">성동구</option>
+			<option value="">성북구</option>
+			<option value="">송파구</option>
+			<option value="">양천구</option>
+			<option value="">영등포구</option>
+			<option value="">용산구</option>
+			<option value="">은평구</option>
+			<option value="">종로구</option>
+			<option value="">중구</option>
+			<option value="">중랑구</option>
+		</select>
+		<a href='javascript:local_seoul();'><INPUT type="submit" value="Find"></INPUT></a>
+		</span>
+		<br><br>
+			<div style = 'position:relative; left:2.5em;'>
+			<!img src ='./img/map_seoul.gif' alt="서울시지도" width="326" height="258" border="0" usemap="#Map2Map" />
+			<img src ='./img/map_seoul.gif' alt="서울시지도" width="489" height="387" border="0" usemap="#Map2Map" /><br>
+			<map name="Map2Map" id="Map2Map">
+		        <area shape="rect" coords="277,12,323,38" href="javascript:local_seoul();" title="도봉구" alt="도봉구"/>
+		        <area shape="rect" coords="249,63,299,83" href="javascript:local_seoul();" title="강북구" alt="강북구"/>
+		        <area shape="rect" coords="324,48,372,72" href="javascript:local_seoul();" title="노원구" alt="노원구"/>
+		        <area shape="rect" coords="164,83,212,108" href="javascript:local_seoul();" title="은평구" alt="은평구"/>
+		        <area shape="rect" coords="267,104,320,128" href="javascript:local_seoul();" title="성북구" alt="성북구"/>
+		        <area shape="rect" coords="348,107,398,134" href="javascript:local_seoul();" title="중랑구" alt="중랑구"/>
+		        <area shape="rect" coords="156,129,221,155" href="javascript:local_seoul();" title="서대문구" alt="서대문구"/>
+		        <area shape="rect" coords="225,126,266,149" href="javascript:local_seoul();" title="종로구" alt="종로구"/>
+		        <area shape="rect" coords="294,132,350,152" href="javascript:local_seoul();" title="동대문구" alt="동대문구"/>
+		        <area shape="rect" coords="35,143,84,165" href="javascript:local_seoul();" title="강서구" alt="강서구"/>
+		        <area shape="rect" coords="129,153,176,173" href="javascript:local_seoul();" title="마포구" alt="마포구"/>
+		        <area shape="rect" coords="242,150,278,173" href="javascript:local_seoul();" title="중구" alt="중구"/>
+		        <area shape="rect" coords="288,158,339,183" href="javascript:local_seoul();" title="성동구" alt="성동구"/>
+		        <area shape="rect" coords="344,165,392,189" href="javascript:local_seoul();" title="광진구" alt="광진구"/>
+		        <area shape="rect" coords="408,162,453,186" href="javascript:local_seoul();" title="강동구" alt="강동구"/>
+		        <area shape="rect" coords="74,201,122,225" href="javascript:local_seoul();" title="양천구" alt="양천구"/>
+		        <area shape="rect" coords="137,192,195,212" href="javascript:local_seoul();" title="영등포구" alt="영등포구"/>
+		        <area shape="rect" coords="218,182,266,203" href="javascript:local_seoul();" title="용산구" alt="용산구"/>
+		        <area shape="rect" coords="63,225,110,246" href="javascript:local_seoul();" title="구로구" alt="구로구"/>
+		        <area shape="rect" coords="180,218,230,240" href="javascript:local_seoul();" title="동작구" alt="동작구"/>
+		        <area shape="rect" coords="251,231,299,252" href="javascript:local_seoul();" title="서초구" alt="서초구"/>
+		        <area shape="rect" coords="303,224,347,246" href="javascript:local_seoul();" title="강남구" alt="강남구"/>
+		        <area shape="rect" coords="368,209,417,230" href="javascript:local_seoul();" title="송파구" alt="송파구"/>
+		        <area shape="rect" coords="180,258,228,278" href="javascript:local_seoul();" title="관악구" alt="관악구"/>
+		        <area shape="rect" coords="120,273,167,294"  href="javascript:local_seoul();" title="금천구" alt="금천구"/>
+		    </map>
+
+			</div>
+	</div>
+	
+	
+<script>
+var seoul_mid = document.getElementById('seoul_mid');
+
+function local_seoul() {
+		seoul_mid.innerHTML="<iframe src='local.php?id=local_seoul&name=서울지역' width=100% height=560 frameborder=0  marginwidth=0  marginheight=0 scrolling=yes>"
+	};
+</script>
+</body>
+</html>

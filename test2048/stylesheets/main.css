@@ -1,0 +1,10 @@
+@import url("reset.css");
+
+#wrap{
+	width: 100%;
+}
+
+#main-board {
+	margin: 0 auto;
+	border: none;
+}
