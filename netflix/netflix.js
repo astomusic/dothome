@@ -99,6 +99,9 @@ var netflix = {
   getCurrencyRate : function() {
     //https://fixer.io/documentation
     var thisMonth = this.today.month+1;
+    if(this.today.date < 7) {
+      alert("매달 7일 이후에 정확한 환율로 반영됩니다.");
+    }
     var date = "" + this.today.year + "-" + this.digit(thisMonth, 2) + "-07";
     var oldDates = [];
     var requestUrlforToday = "http://data.fixer.io/api/" + date + "?access_key=3c8ef267a2f1e746fafd9ec80b116d80";
@@ -110,6 +113,7 @@ var netflix = {
       oldDates.push(requestUrl)
       thisMonth--;
       if(thisMonth <= 0) {
+        this.today.year = this.today.year - 1;
         thisMonth = thisMonth + 12;
       }
     }
